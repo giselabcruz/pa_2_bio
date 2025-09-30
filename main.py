@@ -1,15 +1,3 @@
-from ejercicios import (
-    ejercicio1
-)
-
-def main():
-    var = "GATTACA"
-    comp = ejercicio1.complement(var)
-    print(f"La complementaria de {var} es: {comp}")
-
-if __name__ == "__main__":
-    main()
-
 # Ejercicio 1. Replicación del ADN
 # Objetivo: comprender el mecanismo semiconservativo y las enzimas implicadas.
 # Instrucciones:
