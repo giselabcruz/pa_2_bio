@@ -1,3 +1,15 @@
+from ejercicios import (
+    ejercicio1
+)
+
+def main():
+    var = "GATTACA"
+    comp = ejercicio1.complement(var)
+    print(f"La complementaria de {var} es: {comp}")
+
+if __name__ == "__main__":
+    main()
+
 # Ejercicio 1. Replicación del ADN
 # Objetivo: comprender el mecanismo semiconservativo y las enzimas implicadas.
 # Instrucciones:
@@ -10,17 +22,6 @@
 # Extensión con Biopython:
 # Escribe un pequeño script que, dada una cadena de ADN, genere automáticamente su hebra
 # complementaria, y comprueba si tu resultado coincide con lo que obtuviste manualmente.
-
-print("_____Ejercicio 1_____")
-from Bio import SeqIO
-from Bio.Seq import Seq
-
-def complement(seq):
-    seq = Seq(seq)
-    complementaria = Seq.complement(seq)
-    return complementaria
-
-print(f'Complementaria: {complement("GATTACA")}')
 
 # Ejercicio 2. Transcripción del ADN a ARN
 #
@@ -43,98 +44,99 @@ print(f'Complementaria: {complement("GATTACA")}')
 # Extensión con Biopython:
 # Crea un script que lea un archivo FASTA con ADN y produzca la secuencia de ARNm.
 # Experimenta cambiando la orientación de la hebra y observa qué ocurre.
-print("_____Ejercicio 2_____")
-
-gene = "mocked_gene.fna"
-record = next(SeqIO.parse(gene, "fasta"))
-read_seq = record.seq
-mrna = read_seq.transcribe()
-mrna_reverse = read_seq.reverse_complement().transcribe()
-
-print("Secuencia ADN completa:")
-print(read_seq, "\n")
-
-print("ARNm (codificante):")
-print(mrna, "\n")
-
-print("ARNm (complementaria inversa como codificante):")
-print(mrna_reverse)
-
-# Ejercicio 3. Traducción del ARNm a proteína
-# Objetivo: aplicar el código genético y reflexionar sobre mutaciones.
 #
-# 1. Transcrito: 5’ – AUG UAU GCU UAA – 3’
-#    Codón de inicio: AUG (Metionina)
-#    Codón de paro:   UAA (Stop)
-#    Traducción: AUG → Metionina (M), UAU → Tirosina (Y), GCU → Alanina (A)
-#    Cadena resultante: Met – Tyr – Ala
+# print("_____Ejercicio 2_____")
 #
-# 2. Si AUG muta a GUG → puede iniciar pero menos eficiente; si no se reconoce, no se traduce proteína.
-# 3. Si desaparece el STOP → la traducción continúa hasta otro STOP → proteína más larga y probablemente no funcional.
+# gene = "mocked_gene.fna"
+# record = next(SeqIO.parse(gene, "fasta"))
+# read_seq = record.seq
+# mrna = read_seq.transcribe()
+# mrna_reverse = read_seq.reverse_complement().transcribe()
 #
-# Extensión con Biopython:
-# Traducir automáticamente con Bio.Seq.
-
-print("_____Ejercicio 3_____")
-
-mrna = Seq("AUGUAUGCUUAA")
-protein = mrna.translate()
-
-print("ARNm:", mrna)
-print("Proteína:", protein)
-
-# Ejercicio 4. Splicing alternativo
-# Objetivo: comprender cómo un mismo gen puede generar varias proteínas.
-# Instrucciones:
-# 1. Gen con 5 exones: Exón 1 – Exón 2 – Exón 3 – Exón 4 – Exón 5.
-# 2. Ejemplo de combinaciones: 1-2-4-5 o 1-3-5.
-# 3. Diferencias: distintas combinaciones → distintas proteínas (longitud/estructura).
-# 4. Reflexión: este mecanismo aumenta la diversidad proteica sin necesidad de más genes.
-
-print("_____Ejercicio 4_____")
-
-# Ejercicio 5. Introducción a las proteínas
-# Objetivo: relacionar secuencia, estructura y función.
-# Instrucciones:
-# 1. Secuencia ejemplo: Met – Ile – Ser – Gly – Val – Lys – His.
-# 2. Extremo N: Metionina, Extremo C: Histidina.
-# 3. Reflexión: el orden de aminoácidos determina la estructura final;
-#    una mutación hidrofóbico→hidrofílico en región interna puede desestabilizar el plegamiento.
-
-print("_____Ejercicio 5_____")
-
-# Ejercicio 6. Actividad integradora: del ADN a la proteína
-# Objetivo: recorrer el dogma central completo.
-# Pasos: replicación, transcripción, traducción.
-# Reflexión: la traducción es el punto más vulnerable (un error puede alterar toda la proteína).
+# print("Secuencia ADN completa:")
+# print(read_seq, "\n")
 #
-# Extensión con Biopython: pipeline sencillo.
-
-print("_____Ejercicio 6_____")
-
-fasta = "mocked_gene.fna"
-asume_codificante = True  # False si la secuencia es hebra molde
-
-record = next(SeqIO.parse(fasta, "fasta"))
-dna = record.seq.upper()
-
-hija_A = dna.reverse_complement()
-hija_B = dna
-
-if asume_codificante:
-    mrna = dna.transcribe()
-else:
-    mrna = dna.reverse_complement().transcribe()
-
-s = str(mrna)
-start = s.find("AUG")
-if start == -1:
-    protein = Seq(s).translate(to_stop=True)
-else:
-    protein = Seq(s[start:]).translate(to_stop=True)
-
-print("ADN (5'->3')        :", dna)
-print("Hija A (5'->3')     :", hija_A)
-print("Hija B (5'->3')     :", hija_B)
-print("ARNm (5'->3')       :", mrna)
-print("Proteína (aa)       :", protein if protein else "(vacía)")
+# print("ARNm (codificante):")
+# print(mrna, "\n")
+#
+# print("ARNm (complementaria inversa como codificante):")
+# print(mrna_reverse)
+#
+# # Ejercicio 3. Traducción del ARNm a proteína
+# # Objetivo: aplicar el código genético y reflexionar sobre mutaciones.
+# #
+# # 1. Transcrito: 5’ – AUG UAU GCU UAA – 3’
+# #    Codón de inicio: AUG (Metionina)
+# #    Codón de paro:   UAA (Stop)
+# #    Traducción: AUG → Metionina (M), UAU → Tirosina (Y), GCU → Alanina (A)
+# #    Cadena resultante: Met – Tyr – Ala
+# #
+# # 2. Si AUG muta a GUG → puede iniciar pero menos eficiente; si no se reconoce, no se traduce proteína.
+# # 3. Si desaparece el STOP → la traducción continúa hasta otro STOP → proteína más larga y probablemente no funcional.
+# #
+# # Extensión con Biopython:
+# # Traducir automáticamente con Bio.Seq.
+#
+# print("_____Ejercicio 3_____")
+#
+# mrna = Seq("AUGUAUGCUUAA")
+# protein = mrna.translate()
+#
+# print("ARNm:", mrna)
+# print("Proteína:", protein)
+#
+# # Ejercicio 4. Splicing alternativo
+# # Objetivo: comprender cómo un mismo gen puede generar varias proteínas.
+# # Instrucciones:
+# # 1. Gen con 5 exones: Exón 1 – Exón 2 – Exón 3 – Exón 4 – Exón 5.
+# # 2. Ejemplo de combinaciones: 1-2-4-5 o 1-3-5.
+# # 3. Diferencias: distintas combinaciones → distintas proteínas (longitud/estructura).
+# # 4. Reflexión: este mecanismo aumenta la diversidad proteica sin necesidad de más genes.
+#
+# print("_____Ejercicio 4_____")
+#
+# # Ejercicio 5. Introducción a las proteínas
+# # Objetivo: relacionar secuencia, estructura y función.
+# # Instrucciones:
+# # 1. Secuencia ejemplo: Met – Ile – Ser – Gly – Val – Lys – His.
+# # 2. Extremo N: Metionina, Extremo C: Histidina.
+# # 3. Reflexión: el orden de aminoácidos determina la estructura final;
+# #    una mutación hidrofóbico→hidrofílico en región interna puede desestabilizar el plegamiento.
+#
+# print("_____Ejercicio 5_____")
+#
+# # Ejercicio 6. Actividad integradora: del ADN a la proteína
+# # Objetivo: recorrer el dogma central completo.
+# # Pasos: replicación, transcripción, traducción.
+# # Reflexión: la traducción es el punto más vulnerable (un error puede alterar toda la proteína).
+# #
+# # Extensión con Biopython: pipeline sencillo.
+#
+# print("_____Ejercicio 6_____")
+#
+# fasta = "mocked_gene.fna"
+# asume_codificante = True  # False si la secuencia es hebra molde
+#
+# record = next(SeqIO.parse(fasta, "fasta"))
+# dna = record.seq.upper()
+#
+# hija_A = dna.reverse_complement()
+# hija_B = dna
+#
+# if asume_codificante:
+#     mrna = dna.transcribe()
+# else:
+#     mrna = dna.reverse_complement().transcribe()
+#
+# s = str(mrna)
+# start = s.find("AUG")
+# if start == -1:
+#     protein = Seq(s).translate(to_stop=True)
+# else:
+#     protein = Seq(s[start:]).translate(to_stop=True)
+#
+# print("ADN (5'->3')        :", dna)
+# print("Hija A (5'->3')     :", hija_A)
+# print("Hija B (5'->3')     :", hija_B)
+# print("ARNm (5'->3')       :", mrna)
+# print("Proteína (aa)       :", protein if protein else "(vacía)")
