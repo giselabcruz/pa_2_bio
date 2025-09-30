@@ -1,9 +1,20 @@
 from Bio.Seq import Seq
 
-print("_____Ejercicio 3_____")
+sec = "AUGUAUGCUUAA"
 
-mrna = Seq("AUGUAUGCUUAA")
-protein = mrna.translate()
+def translate_mrna(seq_str: str = sec):
+    """
+    Traduce un ARNm a proteína usando el código genético estándar.
+    Por defecto: AUG UAU GCU UAA → M-Y-A
+    """
+    mrna = Seq(seq_str)
+    protein = mrna.translate()
+    return mrna, protein
 
-print("ARNm:", mrna)
-print("Proteína:", protein)
+def main():
+    mrna, protein = translate_mrna()
+    print("ARNm:", mrna)
+    print("Proteína:", protein)
+
+if __name__ == "__main__":
+    main()
