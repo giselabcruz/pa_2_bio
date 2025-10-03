@@ -22,7 +22,7 @@ def traducir_a_proteina(secuencia_arn):
     return proteina
 
 def main():
-    dna_original = Seq("ATGCGTAGCTAGCATGCTAGCTAGCAT")
+    dna_original = Seq("ATGGCTTTAGGACCT")
     print(f"Hebra de ADN original: {dna_original}\n")
 
     hebra_complementaria = replicar_dna(dna_original)
