@@ -5,7 +5,6 @@ sec = "AUGUAUGCUUAA"
 def translate_mrna(seq_str: str = sec):
     """
     Traduce un ARNm a proteína usando el código genético estándar.
-    Por defecto: AUG UAU GCU UAA → M-Y-A
     """
     mrna = Seq(seq_str)
     protein = mrna.translate()
